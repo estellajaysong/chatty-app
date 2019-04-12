@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
+import Navbar from "./Navbar.jsx"
 import ChatBar from "./ChatBar.jsx";
 import Message from "./Message.jsx";
 import MessageList from "./MessageList.jsx";
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      currentUser: {name: "Stella"},
-      messages: [] 
+      currentUser: { name: "Anonymous" },
+      messages: [],
+      counter: 0
     }
-    
+
   }
 
   addMessage = (message) => {
@@ -22,9 +25,9 @@ class App extends Component {
   }
 
   addName = (name) => {
-  let message = {type: "postNotification", content: `${this.state.currentUser.name} has changed their name to ${name}`}
-   this.setState({ currentUser: {name: name} })
-   this.socket.send(JSON.stringify(message));
+    let message = { type: "postNotification", content: `${this.state.currentUser.name} has changed their name to ${name}` }
+    this.setState({ currentUser: { name: name } })
+    this.socket.send(JSON.stringify(message));
   }
 
   // Called after the component was rendered and it was attached to the
@@ -33,18 +36,23 @@ class App extends Component {
     this.socket = new WebSocket('ws://localhost:3001');
     this.socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      // console.log(data)
-      this.setState({
-         messages: [...this.state.messages, data]
+      console.log("counter", data)
+      if (Number.isInteger(data)) {
+        this.setState({
+          counter: data
         })
-      // code to handle incoming message
-    }    
-    this.setState({
-      loading: false
-    })
-  }  
+      } else {
+        this.setState({
+          messages: [...this.state.messages, data]
+        })
+      }
+      this.setState({
+        loading: false
+      })
+    }
+  }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.socket.close();
   }
   // Called any time the props or state changes. The JSX elements
@@ -55,6 +63,7 @@ class App extends Component {
     } else {
       return (
         <div>
+          <Navbar counter={this.state.counter}/>
           <Message />
           <MessageList messages={this.state.messages} />
           <ChatBar addMessage={this.addMessage} addName={this.addName} currentUser={this.state.currentUser} />
