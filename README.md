@@ -4,7 +4,7 @@ A client-side chatroom SPA built with ReactJS.
 
 ### Final Product
 
-!["Chatty App window"](https://github.com/estellajaysong/chatty-app/blob/master/docs/Screen%20Shot%202019-04-16%20at%2011.18.17%20AM.png?raw=true)
+!["Chatty App window"](https://github.com/estellajaysong/chatty-app/blob/master/docs/Chatty.jpg?raw=true)
 
 ### Dependencies
 
