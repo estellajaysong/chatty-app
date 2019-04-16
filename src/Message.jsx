@@ -12,7 +12,7 @@ class Message extends Component {
       )
     } else {
       output = (
-      <div className="message system">{this.props.content}</div>
+        <div className="message system">{this.props.content}</div>
       )
     }
     return output;

@@ -63,7 +63,7 @@ class App extends Component {
     } else {
       return (
         <div>
-          <Navbar counter={this.state.counter}/>
+          <Navbar counter={this.state.counter} />
           <Message />
           <MessageList messages={this.state.messages} />
           <ChatBar addMessage={this.addMessage} addName={this.addName} currentUser={this.state.currentUser} />

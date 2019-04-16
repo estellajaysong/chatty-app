@@ -31,9 +31,9 @@ class Chatbar extends Component {
     }
 
     const enterName = (event) => {
-      if (event.key === "Enter"){
+      if (event.key === "Enter") {
         this.props.addName(this.state.username)
-        event.target.value =(this.state.username);
+        event.target.value = (this.state.username);
       }
     }
 
